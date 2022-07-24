@@ -63,6 +63,12 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const removeProduct = (productId: number) => {
     try {
+      const productInCart = cart.findIndex((product) => product.id === productId)
+      if (productInCart === -1) {
+        toast.error('Erro na remoção do produto');
+        return;
+      }
+
       const cleanCart = cart.filter((product) => {
         return product.id !== productId
       })
